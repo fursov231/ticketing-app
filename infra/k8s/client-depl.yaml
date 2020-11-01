@@ -14,7 +14,7 @@ spec:
     spec:
         containers:
           - name: client
-            image: fursov231/client
+            image: eu.gcr.io/ticketing-294223/client
 ---
 apiVersion: v1
 kind: Service
