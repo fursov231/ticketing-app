@@ -10,8 +10,11 @@ declare global {
     }
 }
 
+jest.mock("../nats-wrapper") //фейк клиент, чтобы не устанавливать соединение с настоящим NATS сервером при тестировании
+
 let mongo: any;
 beforeAll(async () => {
+    jest.clearAllMocks()
     process.env.JWT_KEY = "jwt-secret";
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
