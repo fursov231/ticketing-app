@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import {updateIfCurrentPlugin} from "mongoose-update-if-current"
 
 interface TicketAttrs {
     title: string,
@@ -9,8 +10,12 @@ interface TicketAttrs {
 interface TicketDoc extends mongoose.Document {
     title: string,
     price: number,
-    userId: string
+    userId: string,
+    version: number, //меняем __v
+    orderId?: string
 }
+
+
 
 const ticketSchema = new mongoose.Schema({
     title: {
@@ -24,6 +29,10 @@ const ticketSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true
+    },
+    orderId: {
+        type: String,
+
     }
 }, {
     toJSON: {
@@ -34,6 +43,9 @@ const ticketSchema = new mongoose.Schema({
         }
     }
 })
+
+ticketSchema.set("versionKey", "version") //меняем __v
+ticketSchema.plugin(updateIfCurrentPlugin)
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
     return new Ticket(attrs)
