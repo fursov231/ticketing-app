@@ -14,7 +14,7 @@ jest.mock("../nats-wrapper") //фейк клиент, чтобы не устан
 
 let mongo: any;
 beforeAll(async () => {
-    jest.clearAllMocks()
+
     process.env.JWT_KEY = "jwt-secret";
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -28,6 +28,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+    jest.clearAllMocks() //должна стоять здесь, иначе будет ошибки совпадения например id (последний символ) при тесте
     const collections = await mongoose.connection.db.collections() //берем все коллекции в mongoDB
 
     for (let collection of collections) {
