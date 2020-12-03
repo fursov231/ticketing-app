@@ -1,0 +1,5 @@
+export const stripe = { // используем фейк функцию в тесте, т.к. нет доступа к STRIPE_KEY в k8s
+    charges: {
+        create: jest.fn().mockResolvedValue({}) //вызываем промис, который автоматически резолвится пустым объектом
+    }
+}

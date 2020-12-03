@@ -7,7 +7,7 @@ import {Message} from "node-nats-streaming"
 
 
 const setup = async () => {
-    //Create an instance of the listener
+    //Create an instance of the listeners
     const listener = new OrderCreatedListener(natsWrapper.client)
     //Create and save a ticket
     const ticket = await Ticket.build({

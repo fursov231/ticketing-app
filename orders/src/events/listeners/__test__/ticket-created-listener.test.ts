@@ -7,7 +7,7 @@ import {Ticket} from "../../../models/ticket"
 
 const setup = async () => {
 
-    //create an instance of the listener
+    //create an instance of the listeners
     const listener = new TicketCreatedListener(natsWrapper.client)
 
     //create a fake data event

@@ -6,7 +6,7 @@ import {TicketUpdatedEvent} from "@vkassa/common"
 import {Message} from "node-nats-streaming"
 
 const setup = async () => {
-    //Create a listener
+    //Create a listeners
     const listener = new TicketUpdatedListener(natsWrapper.client)
 
     //Create and save a ticket

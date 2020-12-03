@@ -50,4 +50,12 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: eu.gcr.io/ticketing-294223/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
 

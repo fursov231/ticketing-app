@@ -21,7 +21,7 @@ export abstract class Listener<T extends Event> {
         return this.client
             .subscriptionOptions()
             .setDeliverAllAvailable() // отображает все пришедшие в прошлом ивенты
-            .setManualAckMode(true) //опция отключает дефолтное поведение потери ивента при необработки (например хендлером), если не подтверждается успешная обработка ивента, то ивент уходит к другому listener`у подписанного на queue group до момента успешного выполнения (должно быть прописано msg.ack() )
+            .setManualAckMode(true) //опция отключает дефолтное поведение потери ивента при необработки (например хендлером), если не подтверждается успешная обработка ивента, то ивент уходит к другому listeners`у подписанного на queue group до момента успешного выполнения (должно быть прописано msg.ack() )
             .setAckWait(this.ackWait) //5 секунд
             .setDurableName("accounting-service") //помогает не обрабатывать ошибочно ивенты, если например accounting service недоступен, и помечать ивенты как доставленные (processed)
     }
