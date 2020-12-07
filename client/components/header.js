@@ -2,9 +2,11 @@ import Link from "next/link"
 
 export default ({currentUser}) => {
     const links = [
-        !currentUser && {label: "Sign Up", href: "/auth/signup"},
-        !currentUser && {label: "Sign In", href: "/auth/signin"},
-        currentUser && {label: "Sign out", href: "/auth/signout"}
+        !currentUser && {label: "Зарегистрироваться", href: "/auth/signup"},
+        !currentUser && {label: "Войти", href: "/auth/signin"},
+        currentUser && {label: "Продать билет", href: "/tickets/new"},
+        currentUser && {label: "Мои заказы", href: "/orders"},
+        currentUser && {label: "Выйти", href: "/auth/signout"}
     ]
         .filter(linkConfig => linkConfig) //отсеиваем false записи
         .map(({label, href}) => {

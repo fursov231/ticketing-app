@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios" //каждый раз когда хотим получить данные, используем эту build функцию
 
 export default ({req}) => {
     if (typeof window === "undefined") { // объект window - окружение браузера, если undefined - node.js
