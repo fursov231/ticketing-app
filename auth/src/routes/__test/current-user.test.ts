@@ -18,7 +18,7 @@ it ("responds with details about current user", async () => {
         .send()
         .expect(200)
     console.log(response.body)
-    expect(response.body.currentUser.email).toEqual("test1ы@test.com")
+    expect(response.body.currentUser.email).toEqual("test1@test.com")
 })
 
 it ("responds with null if user is not authenticated", async () => {
