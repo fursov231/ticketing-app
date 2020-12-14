@@ -15,7 +15,7 @@ app.set("trust proxy", true)
 app.use(json())
 app.use(cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== "test" //работа по протоколу https кроме режима тестирования
+    secure: false // process.env.NODE_ENV !== "test" - работа по протоколу https кроме режима тестирования
 }))
 
 app.use(currentUserRouter)
