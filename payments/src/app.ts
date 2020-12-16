@@ -14,7 +14,7 @@ app.use(
     secure: false
   })
 )
-app.use(currentUser) //для вызова requireAuth и др. middleware`ов в route`е
+app.use(currentUser)
 app.use(createChargeRouter)
 
 

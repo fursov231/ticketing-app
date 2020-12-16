@@ -8,7 +8,7 @@ export default ({currentUser}) => {
         currentUser && {label: "Мои заказы", href: "/orders"},
         currentUser && {label: "Выйти", href: "/auth/signout"}
     ]
-        .filter(linkConfig => linkConfig) //отсеиваем false записи
+        .filter(linkConfig => linkConfig) //Remove false records
         .map(({label, href}) => {
             return <li key={href} className="nav-item">
                 <Link href={href}>

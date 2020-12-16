@@ -30,11 +30,10 @@ const LandingPage = ({tickets}) => {
     )
 }
 
-LandingPage.getInitialProps = async (context, client) => { //для получения данных для отрисовки
+LandingPage.getInitialProps = async (context, client) => { //Receive data for rendering
     const {data} = await client.get("/api/tickets")
     return {tickets: data}
 
 }
-
 
 export default LandingPage

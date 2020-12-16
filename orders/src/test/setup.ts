@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-jest.mock("../nats-wrapper") //фейк клиент, чтобы не устанавливать соединение с настоящим NATS сервером при тестировании
+jest.mock("../nats-wrapper")
 
 let mongo: any;
 beforeAll(async () => {
@@ -28,11 +28,11 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-    jest.clearAllMocks() //должна стоять здесь, иначе будет ошибки совпадения например id (последний символ) при тесте
-    const collections = await mongoose.connection.db.collections() //берем все коллекции в mongoDB
+    jest.clearAllMocks()
+    const collections = await mongoose.connection.db.collections()
 
     for (let collection of collections) {
-        await collection.deleteMany({}) //и удаляем каждую из них
+        await collection.deleteMany({})
     }
 });
 
@@ -56,6 +56,6 @@ global.signin = () => {
     const sessionJSON = JSON.stringify(session)
     //Take JSON and encode it as base64
     const base64 = Buffer.from(sessionJSON).toString("base64")
-    //return a string that the cookie with the encoded data
+    //Return a string that the cookie with the encoded data
     return [`express:sess=${base64}`]
 }

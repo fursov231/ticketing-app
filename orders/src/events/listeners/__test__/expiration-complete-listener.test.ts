@@ -53,7 +53,9 @@ it("emit an OrderCancelled event", async () => {
 
     expect(natsWrapper.client.publish).toHaveBeenCalled()
 
-    const eventData = JSON.parse((natsWrapper.client.publish as jest.Mock).mock.calls[0][1])  //jest-mock ф-ция, с помощью mock.calls получаем доступ к массиву всех вызовов, когда вызывалась ф-ция, 0-й элемент - subject (название канала), ф-ция возвращает объект данных json
+//With jest mock func we get access to the array of all calls when function was called, 0-th elem - subject (channel name)
+//Func return a JSON data object
+    const eventData = JSON.parse((natsWrapper.client.publish as jest.Mock).mock.calls[0][1])
 
     expect(eventData.id).toEqual(order.id)
 })

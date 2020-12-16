@@ -15,7 +15,7 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
             throw new Error("Ticket not found")
         }
 
-        ticket.set({orderId: undefined}) // ? - необязательный тег в описании класса в TS плохо работает с null
+        ticket.set({orderId: undefined}) // ? - doesn`t work well with null
         await ticket.save()
 
         await new TicketUpdatedPublisher(this.client).publish({

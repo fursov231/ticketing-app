@@ -2,8 +2,6 @@ import mongoose from "mongoose"
 import {OrderStatus} from "@vkassa/common"
 import {updateIfCurrentPlugin} from "mongoose-update-if-current"
 
-
-
 interface OrderAttrs {
     id: string
     status: OrderStatus
@@ -47,7 +45,7 @@ const orderShema = new mongoose.Schema({
     }
 )
 
-orderShema.set("versionKey", "version") //заменяет __v на version
+orderShema.set("versionKey", "version") //Replaces __v with version
 orderShema.plugin(updateIfCurrentPlugin)
 
 orderShema.statics.build = (attrs: OrderAttrs) => {

@@ -42,7 +42,7 @@ const newTicket = () => {
                 <label>Цена:</label>
                 <input
                     value={price}
-                    onBlur={onBlur} //деселектит инпут
+                    onBlur={onBlur} //deselect input
                     onChange={(e) => setPrice(e.target.value)}
                     className="form-control"/>
             </div>

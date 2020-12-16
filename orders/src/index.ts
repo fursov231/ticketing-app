@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import { app } from "./app"
-import {natsWrapper} from "./nats-wrapper" //для доступа к nats client`у
+import {natsWrapper} from "./nats-wrapper" //Access to the NATS client
 import {TicketCreatedListener} from "./events/listeners/ticket-created-listener"
 import {TicketUpdatedListener} from "./events/listeners/ticket-updated-listener"
 import {ExpirationCompleteListener} from "./events/listeners/expiration-complete-listener"
@@ -49,13 +49,13 @@ const start = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.log('Connected to MongoDb');
+    console.log("Connected to MongoDB");
   } catch (err) {
     console.error(err);
   }
 
   app.listen(3000, () => {
-    console.log('Listening on port 3000!');
+    console.log("Listening on port 3000");
   });
 };
 

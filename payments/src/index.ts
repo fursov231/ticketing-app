@@ -6,19 +6,19 @@ import {OrderCreatedListener} from "./events/listeners/order-created-listener"
 
 const start = async () => {
     if (!process.env.JWT_KEY) {
-        throw new Error('JWT_KEY must be defined');
+        throw new Error('JWT_KEY must be defined')
     }
     if (!process.env.MONGO_URI) {
-        throw new Error('MONGO_URI must be defined');
+        throw new Error('MONGO_URI must be defined')
     }
     if (!process.env.NATS_CLIENT_ID) {
-        throw new Error('NATS_CLIENT_ID must be defined');
+        throw new Error('NATS_CLIENT_ID must be defined')
     }
     if (!process.env.NATS_URL) {
-        throw new Error('NATS_URL must be defined');
+        throw new Error('NATS_URL must be defined')
     }
     if (!process.env.NATS_CLUSTER_ID) {
-        throw new Error('NATS_CLUSTER_ID must be defined');
+        throw new Error('NATS_CLUSTER_ID must be defined')
     }
 
     try {
@@ -43,14 +43,14 @@ const start = async () => {
             useUnifiedTopology: true,
             useCreateIndex: true,
         });
-        console.log('Connected to MongoDb');
+        console.log("Connected to MongoDB")
     } catch (err) {
-        console.error(err);
+        console.error(err)
     }
 
     app.listen(3000, () => {
-        console.log('Listening on port 3000!');
+        console.log("Listening on port 3000")
     });
 };
 
-start();
+start()

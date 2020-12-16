@@ -4,7 +4,7 @@ import useRequest from "../../hooks/use-request"
 import Router from "next/router"
 
 const OrderShow = ({order, currentUser}) => {
-    const [timeLeft, setTimeLeft] = useState(0) //т.к. отсчет до нуля секунд
+    const [timeLeft, setTimeLeft] = useState(0) //Countdown to 0 seconds
     const {doRequest, errors} = useRequest({
         url: "/api/payments",
         method: "post",
@@ -22,19 +22,18 @@ const OrderShow = ({order, currentUser}) => {
         findTimeLeft()
         const timerId = setInterval(findTimeLeft, 1000)
 
-        return () => { //срабатывает когда уходим в другой компонент или ререндерим компонент
+        return () => { // When we switch to another component or rerendering the component
             clearInterval(timerId)
         }
-    }, [order]) //[] dependencies для того, чтобы срабатывала ф-ция один раз
+    }, [order]) // [order] - dependencies for the function to work once
 
     if (timeLeft < 0) {
-        return <div>Истек срок оплаты заказа
-        </div>
+        return <div>Истек срок оплаты заказа</div>
     }
 
     return (<div>Осталось времени для оплаты: {timeLeft} секунд
             <StripeCheckout
-                token={ ({id}) => doRequest({token: id})}
+                token={({id}) => doRequest({token: id})}
                 stripeKey="pk_test_51HtzoDBmzZqQ8xaZRdTVDvZBq73Tlqa1VRShNcZOaZb4VORi17EAo0e4GKIAmJgizUnAdVsrMfD1LMlJVHFanmCS00wnBLtVpC"
                 amount={order.ticket.price * 100}
                 email={currentUser.email}
@@ -47,10 +46,10 @@ const OrderShow = ({order, currentUser}) => {
 }
 
 OrderShow.getInitialProps = async (context, client) => {
-    const {orderId} = context.query //id из url
+    const {orderId} = context.query //id from url
     const {data} = await client.get(`/api/orders/${orderId}`)
 
-    return {order: data} //возвращаем data как order
+    return {order: data} //Return data as order
 
 }
 

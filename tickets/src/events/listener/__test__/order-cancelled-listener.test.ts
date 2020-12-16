@@ -16,7 +16,7 @@ const setup = async () => {
         userId: "new user",
     })
 
-    ticket.set({orderId}) //для того, чтобы не менять модель Schem`ы
+    ticket.set({orderId}) //So as not to change the Shema model
 
     await ticket.save()
 

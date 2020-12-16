@@ -23,7 +23,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
         //Save the ticket
         await ticket.save()
-        await new TicketUpdatedPublisher(this.client).publish({ // использование встроенной в класс функции client
+        await new TicketUpdatedPublisher(this.client).publish({ // Using func built into class
             id: ticket.id,
             price: ticket.price,
             title: ticket.title,

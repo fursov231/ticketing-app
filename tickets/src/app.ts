@@ -6,7 +6,7 @@ import {currentUser, errorHandler, NotFoundError} from '@vkassa/common'
 import {createTicketRouter} from "./routes/new"
 import {showTicketRouter} from "./routes/show"
 import {indexTicketRouter} from "./routes"
-import {updateTicketRouter} from "./routes/update";
+import {updateTicketRouter} from "./routes/update"
 
 const app = express()
 app.set('trust proxy', true)
@@ -17,7 +17,7 @@ app.use(
     secure: false
   })
 )
-app.use(currentUser) //для вызова requireAuth и др. middleware`ов в route`е
+app.use(currentUser)
 app.use(createTicketRouter)
 app.use(showTicketRouter)
 app.use(indexTicketRouter)

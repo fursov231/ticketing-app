@@ -43,7 +43,7 @@ router.post("/api/payments", requireAuth, [
         const charge = await stripe.charges.create({
             currency: "usd",
             amount: order.price * 100, // cents
-            source: token //откуда придут деньги
+            source: token //where the money will come
         })
 
         const payment = Payment.build({
@@ -51,7 +51,7 @@ router.post("/api/payments", requireAuth, [
             stripeId: charge.id
         })
         await payment.save()
-        await new PaymentCreatedPublisher(natsWrapper.client).publish({ //await чтобы не переходить сразу к res.status
+        await new PaymentCreatedPublisher(natsWrapper.client).publish({ //Use await so as no to go directly to res.status
             id: payment.id,
             orderId: payment.orderId,
             stripeId: payment.stripeId

@@ -3,7 +3,7 @@ import {app} from "../../app"
 import mongoose from "mongoose"
 
 it("returns 404 if the ticket isn`t found", async () => {
-    const id = new mongoose.Types.ObjectId().toHexString() //генерация реалистичного id
+    const id = new mongoose.Types.ObjectId().toHexString()
 
     await request(app)
         .get(`/api/tickets/${id}`)

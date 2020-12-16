@@ -18,7 +18,7 @@ export interface TicketDoc extends mongoose.Document {
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
     build(attrs: TicketAttrs): TicketDoc
-    findByEvent(event: {id: string, version: number}): Promise<TicketDoc> | null //имплементация интерфейса метода поиска ивента
+    findByEvent(event: {id: string, version: number}): Promise<TicketDoc> | null // Event search method interface
 }
 
 const ticketSchema = new mongoose.Schema({
@@ -43,7 +43,7 @@ const ticketSchema = new mongoose.Schema({
 ticketSchema.set("versionKey", "version")
 ticketSchema.plugin(updateIfCurrentPlugin)
 
-ticketSchema.statics.findByEvent = (event: {id: string, version: number}) => { //имплементация метода поиска ивента
+ticketSchema.statics.findByEvent = (event: {id: string, version: number}) => { // Event search method
     return Ticket.findOne({
         _id: event.id,
         version: event.version - 1
@@ -51,24 +51,24 @@ ticketSchema.statics.findByEvent = (event: {id: string, version: number}) => { /
 }
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
     return new Ticket({
-        _id: attrs.id, //для одинакового id в различных сервисах
+        _id: attrs.id, //For the same ID in different services
         title: attrs.title,
         price: attrs.price
     })
 }
 ticketSchema.methods.isReserved = async function () {
-//this === the ticket document that we just called "isReserved" on
+//This === the ticket document that we just called "isReserved" on
     const existingOrder = await Order.findOne({
         ticket: this,
         status: {
-            $in: [ //mongoDB оператор, ищет набор значений
+            $in: [ //MongoDB operator looking for a set of values
                 OrderStatus.Created,
                 OrderStatus.AwaitingPayment,
                 OrderStatus.Complete
             ]
         }
     })
-    return !!existingOrder //перевод в булин, false если нет сущ. заказов
+    return !!existingOrder //False if there are no existing orders
 }
 
 const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema)

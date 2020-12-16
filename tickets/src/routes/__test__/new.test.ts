@@ -3,8 +3,6 @@ import {app} from "../../app"
 import {Ticket} from "../../models/ticket"
 import {natsWrapper} from "../../nats-wrapper"
 
-//jest.mock("../../nats-wrapper") //настоящий файл который хотим mock`нуть (редирект в фейк файл __mocks__) //перенесен в setup.ts
-
 it("has a route handler listening to /api/tickets for post requests", async () => {
     const response = await request(app).post("/api/tickets").send({})
     expect(response.status).not.toEqual(404)
@@ -17,7 +15,7 @@ it("can only be accessed if the user is signed in", async () => {
 it("returns a status other than 401 if the user is signed in", async () => {
     const response = await request(app)
         .post("/api/tickets")
-        .set('Cookie', global.signin()) //signin - глобальная переменная
+        .set('Cookie', global.signin())
         .send({})
 
     expect(response.status).not.toEqual(401)
@@ -47,7 +45,7 @@ it("returns an error if an invalid price is provided", async () => {
         .post("/api/tickets")
         .set("Cookie", global.signin())
         .send({
-            title: "sss",
+                title: "qwerty",
             price: -10
         })
         .expect(400)
@@ -56,7 +54,7 @@ it("returns an error if an invalid price is provided", async () => {
         .post("/api/tickets")
         .set("Cookie", global.signin())
         .send({
-            title: "sss"
+            title: "qwerty"
         })
         .expect(400)
 })
@@ -64,13 +62,13 @@ it("returns an error if an invalid price is provided", async () => {
 it("create a ticket with a valid parameters", async () => {
     let tickets = await Ticket.find({}) //перед запуском теста, коллекции обнулены
     expect(tickets.length).toEqual(0)
-    const title = "sss"
+    const title = "qwerty"
 
     await request(app)
         .post("/api/tickets")
         .set("Cookie", global.signin())
         .send({
-            title: "sss",
+            title: "qwerty",
             price: 110
         })
         .expect(201)

@@ -15,8 +15,8 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
             throw new Error("Order not found")
         }
 
-        if(order.status === OrderStatus.Complete){
-            return msg.ack() //если заказ оплачен, то ничего не делаем с этим ивентом
+        if (order.status === OrderStatus.Complete) { //If the order already paid
+            return msg.ack()
         }
 
         order.set({
@@ -31,7 +31,6 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
                 id: order.ticket.id
             }
         })
-
         msg.ack()
     }
 }

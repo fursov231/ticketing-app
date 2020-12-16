@@ -28,13 +28,13 @@ router.post('/api/users/signup',
         await user.save()
 
 
-        const userJwt = jwt.sign({  //генерирование токена
+        const userJwt = jwt.sign({  //generating a new token
             id: user.id,
             email: user.email
         }, process.env.JWT_KEY!
         )
-
-        req.session = {     //сохраняем токен в объекте сессии
+        //Save the token in session`s object
+        req.session = {
             jwt: userJwt
         }
 
