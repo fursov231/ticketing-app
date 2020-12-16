@@ -13,7 +13,8 @@ declare global {
 
 let mongo: any
 beforeAll(async () => {
-    process.env.JWT_KEY = "JWT_KEY" //задание переменной jwt-secret (т.к. настоящая задана в контейнере)
+    //Set variable jwt-secret because the real one is set in the container
+    process.env.JWT_KEY = "JWT_KEY"
     mongo = new MongoMemoryServer()
     const mongoUri = await mongo.getUri()
 

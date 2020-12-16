@@ -1,5 +1,5 @@
-export const stripe = { // используем фейк функцию в тесте, т.к. нет доступа к STRIPE_KEY в k8s
+export const stripe = { // use a fake func in the test because no access to STRIPE_KEY in k8s cluster
     charges: {
-        create: jest.fn().mockResolvedValue({}) //вызываем промис, который автоматически резолвится пустым объектом
+        create: jest.fn().mockResolvedValue({}) //invoke promise which is automatically resolved with an empty object
     }
 }

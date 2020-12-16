@@ -15,7 +15,7 @@ class NatsWrapper {
     connect(clusterId: string, clientId: string, url: string) {
         this._client = nats.connect(clusterId, clientId, {url})
 
-        return new Promise((resolve, reject) => { // оборачиваем в промис для работы async/await
+        return new Promise((resolve, reject) => { // Promise for async/await syntax
             this.client!.on("connect", () => {
                 console.log("Connected to NATS")
                 resolve()
@@ -29,4 +29,4 @@ class NatsWrapper {
     }
 }
 
-export const natsWrapper = new NatsWrapper() //инстанс класса wrapper
+export const natsWrapper = new NatsWrapper() //class instance of wrapper

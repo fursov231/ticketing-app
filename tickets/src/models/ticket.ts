@@ -11,7 +11,7 @@ interface TicketDoc extends mongoose.Document {
     title: string,
     price: number,
     userId: string,
-    version: number, //меняем __v
+    version: number,
     orderId?: string
 }
 
@@ -19,7 +19,7 @@ interface TicketDoc extends mongoose.Document {
 
 const ticketSchema = new mongoose.Schema({
     title: {
-        type: String, //с большой буквы, т.к. ссылаемся на глобальный конструктор строк в JavaScript
+        type: String,
         required: true
     },
     price: {
@@ -44,7 +44,7 @@ const ticketSchema = new mongoose.Schema({
     }
 })
 
-ticketSchema.set("versionKey", "version") //меняем __v
+ticketSchema.set("versionKey", "version")
 ticketSchema.plugin(updateIfCurrentPlugin)
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {

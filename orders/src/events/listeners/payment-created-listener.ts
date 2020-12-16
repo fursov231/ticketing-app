@@ -7,7 +7,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
     subject: Subjects.PaymentCreated = Subjects.PaymentCreated
     queueGroupName = queueGroupName
 
-    async onMessage (data: PaymentCreatedEvent["data"], msg: Message) {
+    async onMessage(data: PaymentCreatedEvent["data"], msg: Message) {
         const order = await Order.findById(data.orderId)
 
         if (!order) {
@@ -15,10 +15,9 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
         }
 
         order.set({
-            status: OrderStatus.Complete //т.к. мы не подразумеваем последующее изменение, то version не обновляем
+            status: OrderStatus.Complete // Do not update version because we not imply future updates
         })
         await order.save()
-
         msg.ack()
     }
 }

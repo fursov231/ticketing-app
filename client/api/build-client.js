@@ -1,10 +1,11 @@
-import axios from "axios" //каждый раз когда хотим получить данные, используем эту build функцию
+import axios from "axios"
 
+//Function for receive data
 export default ({req}) => {
-    if (typeof window === "undefined") { // объект window - окружение браузера, если undefined - node.js
+    if (typeof window === "undefined") { // Object window - browser environment, if undefined - node.js environment
         return axios.create({
             baseURL: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
-            headers: req.headers //для передачи куки
+            headers: req.headers //For cookie transfer
         })
     } else {
         return axios.create({

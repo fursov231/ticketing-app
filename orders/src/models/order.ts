@@ -5,14 +5,16 @@ import {updateIfCurrentPlugin} from "mongoose-update-if-current"
 
 export {OrderStatus}
 
-interface OrderAttrs { // описывает свойства, которые используются для создания юзера или записи
+//Describe the properties that are used to create a user or record
+interface OrderAttrs {
     userId: string
     status: OrderStatus
     expiresAt: Date
     ticket: TicketDoc
 }
 
-interface OrderDoc extends mongoose.Document { //описывает свойства сохраненного документа
+//Describe the properties of the saved documents
+interface OrderDoc extends mongoose.Document {
     userId: string
     version: number
     status: OrderStatus
@@ -20,7 +22,7 @@ interface OrderDoc extends mongoose.Document { //описывает свойст
     ticket: TicketDoc
 }
 
-//2 interface`а используются, потому что  свойства которые необходимы для создания заказа могут отличаться от свойств в конечном заказе
+//2 interfaces are used because the props that are needed to create the order may differ from the props in the final order
 interface OrderModel extends mongoose.Model<OrderDoc> { //описывает все свойства, которыми обладает модель в целом
     build(attrs: OrderAttrs): OrderDoc
 }

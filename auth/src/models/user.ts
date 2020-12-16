@@ -1,21 +1,20 @@
 import mongoose from "mongoose"
 import {Password} from "../services/password"
 
-
 interface UserAttrs {
     email: string
     password: string
 }
-//properties of User Model //model - entire collection of data
+//Properties of User Model. Model - entire collection of data
 interface UserModel extends mongoose.Model<UserDoc> {
     build(attrs: UserAttrs): UserDoc
 }
-//properties of User Document //represent one single record
+//Properties of User Document. Represent one single record
 interface UserDoc extends mongoose.Document {
     email: string,
     password: string
 }
-//all properties that we want it
+//All properties that we want it
 const userSchema = new mongoose.Schema({
         email: {
             type: String,
@@ -27,7 +26,7 @@ const userSchema = new mongoose.Schema({
         }
     }, {
         toJSON: {
-            transform(doc, ret) { //doc - объект удаления, ret - то что изменяем, для удаления данных в response
+            transform(doc, ret) { //doc - object of deletion, ret - what we change to delete data in response
                 ret.id = ret._id
                 delete ret._id
                 delete ret.password
@@ -37,7 +36,7 @@ const userSchema = new mongoose.Schema({
     }
 )
 
-//pre hook нужен для hash`ирования пароля
+//Pre hook needed to hash the password
 userSchema.pre("save", async function (done) {
     if (this.isModified("password")) {
         const hashed = await Password.toHash(this.get("password"))
@@ -45,7 +44,7 @@ userSchema.pre("save", async function (done) {
     }
     done()
 })
-//функция нужна для typescript`a, для валидация свойств для создания новой записи
+//Function needed for typescript (for validation properties when creating new record)
 userSchema.statics.build = (attrs: UserAttrs) => {
     return new User(attrs)
 }

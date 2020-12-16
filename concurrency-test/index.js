@@ -4,7 +4,7 @@ const axios = require('axios')
 const cookie =
     "express:sess=eyJqd3QiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJalZtWW1Ka1ltRm1PR1JrWkRkaU1EQXhPRE01TURrM05pSXNJbVZ0WVdsc0lqb2lkR1ZxYzJ3MGRFQjBaWE4wTG1OdmJTSXNJbWxoZENJNk1UWXdOakUwTmprNU1YMC51aFJuY2lIQmIwTE5vVEpOaVh2TzdWMlllM09TSUF5b25KQVZSdU1iWjkwIn0"
 
-//тест на последовательную запись ивентов в БД (по очереди версий)
+//Test for sequential recording of events to the DB (with versions)
 const doRequest = async () => {
     const { data } = await axios.post(
         `https://ticketing.dev/api/tickets`,

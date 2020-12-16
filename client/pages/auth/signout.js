@@ -13,5 +13,5 @@ export default () => {
         doRequest()
     }, [])
 
-    return <div>Signing you out ...</div>
+    return <div>Вы вышли из аккаунта...</div>
 }

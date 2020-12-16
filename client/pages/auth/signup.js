@@ -15,7 +15,6 @@ export default () => {
         onSuccess: () => Router.push("/")
     })
 
-
     const onSubmit = async (err) => {
         err.preventDefault()
 
@@ -24,23 +23,22 @@ export default () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <h1>Sign Up</h1>
+            <h1>Регистрация</h1>
             <div className="form-group">
-                <label>Email Adress</label>
+                <label>Электронная почта</label>
                 <input value={email}
                        onChange={err => setEmail(err.target.value)}
                        className="form-control"/>
             </div>
             <div className="form-group">
-                <label>Password</label>
+                <label>Пароль</label>
                 <input value={password}
                        onChange={err => setPassword(err.target.value)}
                        type="password"
                        className="form-control"/>
             </div>
             {errors}
-            <button className="btn btn-primary">Sign up</button>
-
+            <button className="btn btn-primary">Зарегистрироваться</button>
         </form>
     )
 }
